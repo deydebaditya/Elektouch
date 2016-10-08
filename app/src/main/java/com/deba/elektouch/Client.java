@@ -1,5 +1,9 @@
 package com.deba.elektouch;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -12,37 +16,39 @@ import java.net.Socket;
  *
  * @author Deba
  */
-public class Client implements Serializable{
+public class Client extends AsyncTask implements Serializable{
 
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private String serverIP;
     private Socket connection;
     public String messageToSend="";
+    ProgressDialog progress;
 
     public Client(String host){
         serverIP=host;
     }
-    public void startRunning(){
+    @Override
+    protected void onPreExecute(){
         try{
-            connectToServer();
-            setupStreams();
-            whileRunning();
+            progress.setMessage("Connecting to server!");
+            progress.setCancelable(false);
+            progress.show();
         }
         catch(Exception e){
             e.printStackTrace();
         }
     }
     public void connectToServer()throws IOException{
-        System.out.println("Attempting to conenct!");
+        Log.e("Connection","Attempting to connect!");
         connection=new Socket(InetAddress.getByName(serverIP),6789);
-        System.out.println("Connected to "+connection.getInetAddress().getHostName());
+        Log.e("Connection","Connected to "+connection.getInetAddress().getHostName());
     }
     public void setupStreams()throws IOException{
         output = new ObjectOutputStream(connection.getOutputStream());
         output.flush();
         input=new ObjectInputStream(connection.getInputStream());
-        System.out.println("You are now setup!");
+        Log.e("Connection","You are now setup!");
     }
     private void whileRunning()throws IOException{
 
@@ -54,5 +60,22 @@ public class Client implements Serializable{
         }catch(Exception e5){
         e5.printStackTrace();
         }
+    }
+
+    @Override
+    protected Object doInBackground(Object[] params) {
+        try {
+            connectToServer();
+            setupStreams();
+            whileRunning();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Object list){
+        progress.dismiss();
     }
 }
