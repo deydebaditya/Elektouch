@@ -23,13 +23,18 @@ public class LightsActivity extends AppCompatActivity {
         lights=(Switch)findViewById(R.id.switch_lights);
         strobe=(Switch)findViewById(R.id.switch_strobe);
         regulator=(SeekBar)findViewById(R.id.regulator);
-
+        Client client= (Client) getIntent().getSerializableExtra("client");
         //TODO: check for on/off
         lights.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     Log.e("Lights","ON");
+                    client.sendMessage("lights on");
+                }
+                else{
+                    Log.e("Lights","OFF");
+                    client.sendMessage("lights off");
                 }
             }
         });
