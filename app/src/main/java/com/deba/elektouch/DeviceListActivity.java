@@ -25,7 +25,7 @@ public class DeviceListActivity extends AppCompatActivity {
         fan=(Button)findViewById(R.id.button_fan);
 
         Client client=new Client("192.168.13.225");
-        client.execute();//Start connection
+        client.execute();//Start connection to server
 
         lights.setOnClickListener(new View.OnClickListener() {
             @Override

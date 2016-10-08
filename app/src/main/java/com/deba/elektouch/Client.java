@@ -65,7 +65,7 @@ public class Client extends AsyncTask implements Serializable{
     @Override
     protected Object doInBackground(Object[] params) {
         try {
-            connectToServer();
+            connectToServer();//Connection
             setupStreams();
             whileRunning();
         }catch(Exception e){
