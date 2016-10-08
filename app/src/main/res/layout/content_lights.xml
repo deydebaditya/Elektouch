@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/main_header_selector"
+    tools:context="com.deba.elektouch.LightsActivity">
+
+    <TextView
+        android:text="LIGHTS CONTROLS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/textView_lights"
+        android:textSize="40dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="#ffffff"/>
+
+    <TextView
+        android:text="State"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_lights"
+        android:layout_alignLeft="@+id/textView_lights"
+        android:layout_alignStart="@+id/textView_lights"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="61dp"
+        android:id="@+id/textView_state"
+        android:textSize="20dp"
+        android:textColor="#f489f5" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView_state"
+        android:layout_alignRight="@+id/textView_lights"
+        android:layout_alignEnd="@+id/textView_lights"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp"
+        android:id="@+id/switch_lights"
+        android:textColor="#ffffff"
+        android:hapticFeedbackEnabled="true"/>
+
+    <SeekBar
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView_regulator"
+        android:id="@+id/regulator"
+        android:layout_alignRight="@+id/textView_lights"
+        android:layout_alignEnd="@+id/textView_lights" />
+
+    <TextView
+        android:text="Regulator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:id="@+id/textView_regulator"
+        android:textSize="20dp"
+        android:textColor="#f489f5"
+        android:layout_below="@+id/switch_lights"
+        android:layout_alignLeft="@+id/textView_state"
+        android:layout_alignStart="@+id/textView_state" />
+
+    <TextView
+        android:text="Strobe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:id="@+id/textView_strobe"
+        android:textSize="20dp"
+        android:textColor="#f489f5"
+        android:layout_below="@+id/regulator"
+        android:layout_alignLeft="@+id/textView_state"
+        android:layout_alignStart="@+id/textView_state" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView_strobe"
+        android:layout_alignLeft="@+id/switch_lights"
+        android:layout_alignStart="@+id/switch_lights"
+        android:id="@+id/switch_strobe" />
+
+</RelativeLayout>
