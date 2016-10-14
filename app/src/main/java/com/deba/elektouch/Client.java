@@ -3,6 +3,7 @@ package com.deba.elektouch;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,29 +17,19 @@ import java.net.Socket;
  *
  * @author Deba
  */
-public class Client extends AsyncTask implements Serializable{
+public class Client implements Serializable{
 
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private String serverIP;
     private Socket connection;
     public String messageToSend="";
-    ProgressDialog progress;
 
     public Client(String host){
         serverIP=host;
+        runMe();
     }
-    @Override
-    protected void onPreExecute(){
-        try{
-            progress.setMessage("Connecting to server!");
-            progress.setCancelable(false);
-            progress.show();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-    }
+
     public void connectToServer()throws IOException{
         Log.e("Connection","Attempting to connect!");
         connection=new Socket(InetAddress.getByName(serverIP),6789);
@@ -61,21 +52,16 @@ public class Client extends AsyncTask implements Serializable{
         e5.printStackTrace();
         }
     }
+    public void runMe() {
 
-    @Override
-    protected Object doInBackground(Object[] params) {
         try {
             connectToServer();//Connection
             setupStreams();
             whileRunning();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
-    @Override
-    protected void onPostExecute(Object list){
-        progress.dismiss();
-    }
+
 }
