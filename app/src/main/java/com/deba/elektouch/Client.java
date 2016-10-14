@@ -22,7 +22,7 @@ public class Client extends AsyncTask implements Serializable{
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private String serverIP;
-    private Socket connection;
+    private transient Socket connection;
     public String messageToSend="";
 
     public Client(String host){

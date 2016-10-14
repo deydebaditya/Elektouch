@@ -24,18 +24,18 @@ public class LightsActivity extends AppCompatActivity {
     Switch lights,strobe;
     SeekBar regulator;
     String regulate;
-    Bundle getClient;
-    Client client;
+//    Bundle getClient;
+    com.deba.elektouch.LightsActivity.Client client=new com.deba.elektouch.LightsActivity.Client("192.168.13.165");
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getClient=getIntent().getBundleExtra("client");
-        client=(Client)getClient.getSerializable("client");
+//        getClient=getIntent().getBundleExtra("client");
+//        client=(Client)getClient.getSerializable("client");
         setContentView(R.layout.activity_lights);
         lights=(Switch)findViewById(R.id.switch_lights);
         strobe=(Switch)findViewById(R.id.switch_strobe);
         regulator=(SeekBar)findViewById(R.id.regulator);
-//        client.execute();
+        client.execute();
         //TODO: check for on/off
         lights.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -94,63 +94,63 @@ public class LightsActivity extends AppCompatActivity {
         client.sendMessage("close");
     }
 ///////////////////INNER CLASS IF OUTER DOESNT WORK/////////////////////////
-//    class Client extends AsyncTask implements Serializable{
-//
-//        private ObjectOutputStream output;
-//        private ObjectInputStream input;
-//        private String serverIP;
-//        private Socket connection;
-//        public String messageToSend="";
-//
-//        public Client(String host){
-//            serverIP=host;
-//        }
-//        @Override
-//        protected void onPreExecute(){
-//            try{
-//                super.onPreExecute();
-//            }
-//            catch(Exception e){
-//                e.printStackTrace();
-//            }
-//        }
-//        public void connectToServer()throws IOException {
-//            Log.e("Connection","Attempting to connect!");
-//            connection=new Socket(InetAddress.getByName(serverIP),6789);
-//            Log.e("Connection","Connected to "+connection.getInetAddress().getHostName());
-//        }
-//        public void setupStreams()throws IOException{
-//            output = new ObjectOutputStream(connection.getOutputStream());
-//            output.flush();
-//            input=new ObjectInputStream(connection.getInputStream());
-//            Log.e("Connection","You are now setup!");
-//        }
-//        private void whileRunning()throws IOException{
-//
-//        }
-//        public void sendMessage(String message){
-//            try{
-//                output.writeObject(message);
-//                output.flush();
-//            }catch(Exception e5){
-//                e5.printStackTrace();
-//            }
-//        }
-//
-//        @Override
-//        protected Object doInBackground(Object[] params) {
-//            try {
-//                connectToServer();//Connection
-//                setupStreams();
-//                whileRunning();
-//            }catch(Exception e){
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Object list){
-//        }
-//    }
+    class Client extends AsyncTask implements Serializable{
+
+        private ObjectOutputStream output;
+        private ObjectInputStream input;
+        private String serverIP;
+        private Socket connection;
+        public String messageToSend="";
+
+        public Client(String host){
+            serverIP=host;
+        }
+        @Override
+        protected void onPreExecute(){
+            try{
+                super.onPreExecute();
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        public void connectToServer()throws IOException {
+            Log.e("Connection","Attempting to connect!");
+            connection=new Socket(InetAddress.getByName(serverIP),6789);
+            Log.e("Connection","Connected to "+connection.getInetAddress().getHostName());
+        }
+        public void setupStreams()throws IOException{
+            output = new ObjectOutputStream(connection.getOutputStream());
+            output.flush();
+            input=new ObjectInputStream(connection.getInputStream());
+            Log.e("Connection","You are now setup!");
+        }
+        private void whileRunning()throws IOException{
+
+        }
+        public void sendMessage(String message){
+            try{
+                output.writeObject(message);
+                output.flush();
+            }catch(Exception e5){
+                e5.printStackTrace();
+            }
+        }
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            try {
+                connectToServer();//Connection
+                setupStreams();
+                whileRunning();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object list){
+        }
+    }
 }
