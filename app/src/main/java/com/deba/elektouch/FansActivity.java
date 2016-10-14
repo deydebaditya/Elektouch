@@ -43,7 +43,7 @@ public class FansActivity extends AppCompatActivity {
                 }
                 else{
                     Log.e("Lights","OFF");
-                    client.sendMessage("fans off");
+                    client.sendMessage("fans off");//
                 }
             }
         });
