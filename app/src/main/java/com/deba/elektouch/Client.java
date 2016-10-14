@@ -17,7 +17,7 @@ import java.net.Socket;
  *
  * @author Deba
  */
-public class Client implements Serializable{
+public class Client extends AsyncTask implements Serializable{
 
     private ObjectOutputStream output;
     private ObjectInputStream input;
@@ -27,8 +27,15 @@ public class Client implements Serializable{
 
     public Client(String host){
         serverIP=host;
-        runMe();
+        this.execute();
     }
+
+    @Override
+    protected Object doInBackground(Object[] params) {
+        runMe();
+        return null;
+    }
+
 
     public void connectToServer()throws IOException{
         Log.e("Connection","Attempting to connect!");
