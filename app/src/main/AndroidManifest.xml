@@ -55,6 +55,13 @@
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
+        <activity android:name=".SpeechRecogActivity"
+            android:theme="@style/AppTheme"
+            android:label="Your Voice, My Command">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

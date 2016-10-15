@@ -16,7 +16,7 @@ import java.io.Serializable;
 
 public class DeviceListActivity extends AppCompatActivity implements Serializable{
 
-    Button lights,fan;
+    Button lights,fan,elek;
 //    Client client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class DeviceListActivity extends AppCompatActivity implements Serializabl
         setContentView(R.layout.activity_devicepage);
         lights=(Button)findViewById(R.id.button_lights);
         fan=(Button)findViewById(R.id.button_fan);
+        elek=(Button)findViewById(R.id.button_ai);
 
         //Start connection to server
 //        client=new Client("192.168.13.165");
@@ -44,6 +45,13 @@ public class DeviceListActivity extends AppCompatActivity implements Serializabl
             public void onClick(View v) {
                 Intent fansIntent=new Intent(DeviceListActivity.this,FansActivity.class);
                 startActivity(fansIntent);
+            }
+        });
+        elek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent AI=new Intent(DeviceListActivity.this,SpeechRecogActivity.class);
+                startActivity(AI);
             }
         });
     }
