@@ -12,7 +12,7 @@
 
     <Button
         android:text="LIGHTS"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:textAlignment="gravity"
         android:gravity="end"
         android:paddingRight="80dp"
@@ -28,7 +28,7 @@
     </Button>
     <Button
         android:text="FAN"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:textAlignment="gravity"
         android:gravity="end"
         android:paddingTop="55dp"
@@ -44,7 +44,7 @@
     </Button>
     <Button
         android:text="SUMMON ELEK"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:textAlignment="gravity"
         android:gravity="end"
         android:paddingTop="55dp"
@@ -63,7 +63,7 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:paddingTop="10dp"
-        app:srcCompat="@drawable/bulb"
+        android:src="@drawable/bulb"
         android:layout_alignStart="@+id/button_lights"
         android:layout_alignLeft="@+id/button_lights"
         android:id="@+id/imageViewLights" />
@@ -72,7 +72,7 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:paddingTop="10dp"
-        app:srcCompat="@drawable/fan_icon"
+        android:src="@drawable/fan_icon"
         android:id="@+id/imageViewFan"
         android:layout_below="@+id/button_lights"
         android:layout_alignParentLeft="true"
@@ -82,7 +82,7 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:paddingTop="10dp"
-        app:srcCompat="@drawable/ai"
+        android:src="@drawable/ai"
         android:id="@+id/imageViewAI"
         android:layout_below="@+id/button_fan"
         android:layout_alignParentLeft="true"
