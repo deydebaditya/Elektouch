@@ -25,7 +25,7 @@ public class FansActivity extends AppCompatActivity {
     Switch fans;
     SeekBar regulator;
     String regulate;
-    com.deba.elektouch.FansActivity.Client client=new com.deba.elektouch.FansActivity.Client("192.168.13.165");
+    com.deba.elektouch.FansActivity.Client client=new com.deba.elektouch.FansActivity.Client("192.168.100.142");
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

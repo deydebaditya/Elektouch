@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     String previousJson=null,input;
     ProgressDialog progress;
     ArrayList<String> issuedUids;
+    int LOGGED_IN=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -84,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
 //                    else{
 //                        Snackbar.make(v,"UID not registered!",Snackbar.LENGTH_SHORT).show();
 //                    }
-                    Toast.makeText(getApplicationContext(),"Logged In Successfully!",Toast.LENGTH_SHORT).show();
                     //TODO:If validation is completely OK, rest of the login code here.
                 }
             }
@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
 //            for (int i = 0; i < loginArray.length(); i++) {
                 if (loginArray.getJSONObject(uid.getText().toString()).get("password").equals(password.getText().toString())) {
                         Intent deviceListintent=new Intent(MainActivity.this,DeviceListActivity.class);
+                        LOGGED_IN=1;
                         startActivity(deviceListintent);
                     }
 //                }
@@ -224,6 +225,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Object list){
             progress.dismiss();
+            if(LOGGED_IN==1){
+                Toast.makeText(getApplicationContext(),"Logged In Successfully!",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getApplicationContext(),"Something went wrong! Couldn't log in!",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

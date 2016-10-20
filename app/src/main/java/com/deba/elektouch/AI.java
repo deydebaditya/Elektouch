@@ -3,6 +3,7 @@ package com.deba.elektouch;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -20,11 +21,13 @@ public class AI  extends AsyncTask<String,Void,String>{
     public Activity myactivity;
     AI_actual ai = new AI_actual();
     String input;
-    com.deba.elektouch.AI.Client client=new com.deba.elektouch.AI.Client("192.168.13.165");
+    TextView reply_hint;
+    com.deba.elektouch.AI.Client client=new com.deba.elektouch.AI.Client("192.168.100.142");
 
-    public AI(Activity myactivity) {
+    public AI(Activity myactivity,TextView reply) {
         super();
         this.myactivity=myactivity;
+        this.reply_hint=reply;
     }
 
     @Override
@@ -73,16 +76,21 @@ return input;
                 e.printStackTrace();
             }
         }
-        public void connectToServer()throws IOException {
-            Log.e("Connection","Attempting to connect!");
-            connection=new Socket(InetAddress.getByName(serverIP),6789);
-            Log.e("Connection","Connected to "+connection.getInetAddress().getHostName());
+        public void connectToServer() {
+            try {
+                Log.e("Connection", "Attempting to connect!");
+                connection = new Socket(InetAddress.getByName(serverIP), 6789);
+                Log.e("Connection", "Connected to " + connection.getInetAddress().getHostName());
+            }
+            catch(IOException e){
+            }
         }
         public void setupStreams()throws IOException{
             output = new ObjectOutputStream(connection.getOutputStream());
             output.flush();
             input=new ObjectInputStream(connection.getInputStream());
             Log.e("Connection","You are now setup!");
+            reply_hint.setVisibility(View.INVISIBLE);
         }
         private void whileRunning()throws IOException{
 

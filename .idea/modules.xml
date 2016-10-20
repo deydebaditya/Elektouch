@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Elektouch.iml" filepath="$PROJECT_DIR$/Elektouch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Elektouch_final.iml" filepath="$PROJECT_DIR$/Elektouch_final.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mysql-connector-java-5.1.39-bin/mysql-connector-java-5.1.39-bin.iml" filepath="$PROJECT_DIR$/mysql-connector-java-5.1.39-bin/mysql-connector-java-5.1.39-bin.iml" />
     </modules>

@@ -26,13 +26,14 @@ import java.util.Locale;
 
 public class SpeechRecogActivity extends AppCompatActivity {
 
-    TextView reply;
+    TextView reply,replyhint;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elek);
         reply=(TextView)findViewById(R.id.resultText);
+        replyhint=(TextView)findViewById(R.id.resultText_hint);
     }
     public void setButtonclick(View view) {
         if (view.getId() == R.id.speech)
@@ -58,7 +59,7 @@ public class SpeechRecogActivity extends AppCompatActivity {
                     ArrayList<String> string_result = i.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     reply.setText(string_result.get(0));
                     input=string_result.get(0);
-                    AI child= new AI(this);
+                    AI child= new AI(this,replyhint);
                     child.execute(input);
                 }
                 break;

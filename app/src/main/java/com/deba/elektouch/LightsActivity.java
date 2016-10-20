@@ -25,7 +25,7 @@ public class LightsActivity extends AppCompatActivity {
     SeekBar regulator;
     String regulate;
 //    Bundle getClient;
-    com.deba.elektouch.LightsActivity.Client client=new com.deba.elektouch.LightsActivity.Client("192.168.13.165");
+    com.deba.elektouch.LightsActivity.Client client=new com.deba.elektouch.LightsActivity.Client("192.168.100.142");
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
