@@ -42,14 +42,28 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:id="@+id/verify_sec_code"
-        android:hint="ENTER SECURITY CODE PROVIDED"
+        android:id="@+id/verify_uid_reset"
+        android:hint="ENTER UID"
         android:textColor="@color/textColorCustom"
         android:textColorHint="@color/textColorCustom"
         android:background="@drawable/rounded_edittext"
         android:singleLine="true"
         android:layout_below="@+id/logo"
         android:layout_marginTop="50dp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:nextFocusForward="@+id/res_pass"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/verify_sec_code"
+        android:hint="ENTER SECURITY CODE PROVIDED"
+        android:textColor="@color/textColorCustom"
+        android:textColorHint="@color/textColorCustom"
+        android:background="@drawable/rounded_edittext"
+        android:singleLine="true"
+        android:layout_below="@+id/verify_uid_reset"
+        android:layout_marginTop="20dp"
         android:textAlignment="center"
         android:layout_centerHorizontal="true"
         android:nextFocusForward="@+id/res_pass"/>
@@ -93,6 +107,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/confirm_res_pass"
-        android:layout_marginTop="70dp"/>
+        android:layout_marginTop="57dp"/>
 
 </RelativeLayout>

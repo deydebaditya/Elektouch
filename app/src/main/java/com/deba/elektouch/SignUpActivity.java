@@ -60,6 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
     ProgressDialog progress;
     JSONObject newJson;
     ArrayList<String> issuedUids;
+    View newView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                newView=v;
                 if (name.getText().toString().length() == 0) {
                     name.setError("NAME REQUIRED");
                     validationErrorName = 1;
@@ -147,19 +149,15 @@ public class SignUpActivity extends AppCompatActivity {
                 } else {
                     validationErrorCode = 0;
                 }
+                //TODO: Check for validation and then execute below classes.
                 new DownloadUids().execute();//Downlaod UIDS
                 new SignUp().execute();//JSON formatting
 //TODO:Push the new JSON to the server, using php post.
 
-                if(true){Snackbar.make(v,"Signup Successful",Snackbar.LENGTH_SHORT).show();}
-                else {
-                    Snackbar.make(v,"Signup Unsuccessful",Snackbar.LENGTH_SHORT).show();
-                }
-
             }
         });
     }
-    private void formatNewJson(){
+    private void formatNewJson(View v){
         try {
             HttpClient httpClient=new DefaultHttpClient();
             HttpPost request=new HttpPost("http://elektouch.16mb.com/json_put.php");
@@ -171,6 +169,7 @@ public class SignUpActivity extends AppCompatActivity {
             params.add(new BasicNameValuePair("sec_code",sec_code.getText().toString()));
             request.setEntity(new UrlEncodedFormEntity(params));
             HttpResponse response = httpClient.execute(request);
+            Snackbar.make(v,"Signup Successful",Snackbar.LENGTH_SHORT).show();
             } catch (UnsupportedEncodingException e1) {
             e1.printStackTrace();
         } catch (ClientProtocolException e1) {
@@ -221,7 +220,7 @@ public class SignUpActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            formatNewJson();
+            formatNewJson(newView);
             return previousJson;
         }
 

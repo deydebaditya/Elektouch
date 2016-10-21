@@ -3,9 +3,8 @@ package com.deba.elektouch;
 /**
  * Created by root on 7/10/16.
  */
-import java.io.*;
-import java.nio.Buffer;
-import java.util.*;
+import java.util.Collections;
+import java.util.Vector;
 
 public class AI_actual {
 
@@ -477,6 +476,12 @@ public class AI_actual {
                                 "SO, YOU ARE SAYING IT'S ALRIGHT.",
                                 "OK THEN."}
                 },
+                {{"BORED" ,"BORE"},
+                        {"SO, WHAT YOU WANT ME TO DO FOR YOU ?",
+                                "SO, TELL ME SOMETHING YOU WANT ME TO DO",
+                                "ORDER MY MASTER, WHAT CAN I DO FOR YOU ?"}
+                },
+
 
                 {{"I DON'T"},
                         {"WHY NOT?",

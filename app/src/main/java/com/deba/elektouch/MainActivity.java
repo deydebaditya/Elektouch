@@ -2,24 +2,21 @@ package com.deba.elektouch;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,14 +36,15 @@ public class MainActivity extends AppCompatActivity {
     int UID_FOUND_ON_SERVER=0;
     String previousJson=null,input;
     ProgressDialog progress;
+    int ALREADY_LOGGED_IN;
     ArrayList<String> issuedUids;
+    SharedPreferences settings;
+    int LOGGED_IN=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
         signup=(TextView)findViewById(R.id.signup);
         reset_password=(TextView)findViewById(R.id.password_reset);
         login=(Button)findViewById(R.id.loginBut);
@@ -60,6 +58,17 @@ public class MainActivity extends AppCompatActivity {
         int width=metrics.widthPixels;
         loginLayout.setMinimumWidth(width);
         loginLayout.setMinimumHeight(height);
+        settings=getSharedPreferences("login",0);
+        if(settings.getString("uid",null)==null||settings.getString("password",null)==null){
+            ALREADY_LOGGED_IN=0;
+            Toast.makeText(getApplicationContext(),"Hello! Please Login to continue",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Intent device=new Intent(MainActivity.this,DeviceListActivity.class);
+            startActivity(device);
+        }
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
 //                    else{
 //                        Snackbar.make(v,"UID not registered!",Snackbar.LENGTH_SHORT).show();
 //                    }
-                    Toast.makeText(getApplicationContext(),"Logged In Successfully!",Toast.LENGTH_SHORT).show();
                     //TODO:If validation is completely OK, rest of the login code here.
                 }
             }
@@ -115,7 +123,12 @@ public class MainActivity extends AppCompatActivity {
             Log.e("User", String.valueOf(loginArray.getJSONObject(uid.getText().toString()).get("password")));
 //            for (int i = 0; i < loginArray.length(); i++) {
                 if (loginArray.getJSONObject(uid.getText().toString()).get("password").equals(password.getText().toString())) {
+                    SharedPreferences.Editor newEdit=settings.edit();
+                    newEdit.putString("uid",uid.getText().toString());
+                    newEdit.putString("password",password.getText().toString());
+                    newEdit.commit();
                         Intent deviceListintent=new Intent(MainActivity.this,DeviceListActivity.class);
+                        LOGGED_IN=1;
                         startActivity(deviceListintent);
                     }
 //                }
@@ -224,6 +237,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Object list){
             progress.dismiss();
+            if(LOGGED_IN==1){
+                Toast.makeText(getApplicationContext(),"Logged In Successfully!",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getApplicationContext(),"Something went wrong! Couldn't log in!",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
