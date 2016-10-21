@@ -7,8 +7,10 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.deba.elektouch.DeviceListActivity">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <include layout="@layout/content_devicepage" />
-
+</ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

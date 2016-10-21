@@ -25,9 +25,9 @@ public class AI_actual {
 
         static String KnowledgeBase[][][] = {
                 {{"WHAT IS YOUR NAME","NAME"},
-                        {"MY NAME IS ELECK",
+                        {"WHY DO YOU WANT TO KNOW MY NAME?",
                                 "YOU CAN CALL ME YOUR ASSISTANT ",
-                                "WHY DO YOU WANT TO KNOW MY NAME?"}
+                                "MY NAME IS ELEK"}
                 },
 
                 {{"HI", "HELLO" , "WASSUP"},
@@ -59,8 +59,8 @@ public class AI_actual {
                 {{"I LOVE CHATTING"},
                         {"GOOD, ME TOO!",
                                 "DO YOU CHAT ONLINE WITH OTHER PEOPLE?",
-                                "FOR HOW LONG HAVE YOU BEEN CHATING?",
-                                "WHAT IS YOUR FAVORITE CHATING WEBSITE?"}
+                                "FOR HOW LONG HAVE YOU BEEN CHATTING?",
+                                "WHAT IS YOUR FAVORITE CHATTING WEBSITE?"}
                 },
                 {{"ASHWIN"},
                         {"KULKARNI",
@@ -159,6 +159,10 @@ public class AI_actual {
                                 "FANS OFF",
                                 "FANS OFF"}
                 },
+                {{"BEST TEACHER","WHO ARE YOU GETTING SUBMITTED TO"},
+                        {"PRAJAKTA KALE",
+                        }
+                },
 
 
                 {{"ARE YOU INTELLIGENT"},
@@ -197,7 +201,7 @@ public class AI_actual {
                         {"I HAVE NO IDEA OF WHAT YOU ARE TALKING ABOUT.",
                                 "I'M NOT SURE IF I UNDERSTAND WHAT YOU ARE TALKING ABOUT.",
                                 "CONTINUE, I'M LISTENING...",
-                                "I DIDNT  UNDERSTOOD "}
+                                "I DIDN'T UNDERSTAND "}
                 },
 
                 {{"NULL INPUT**"},
@@ -469,6 +473,10 @@ public class AI_actual {
                         {"SO,I WAS RIGHT.",
                                 "OK THEN.",
                                 "SO ARE BASICALY SAYING I WAS RIGHT ABOUT IT?"}
+                },
+                {{"BOSS","WHO'S YOUR BOSS","CREATOR","WHO'S YOUR CREATOR"},
+                        {"ABHIJIT, DEBADITYA AND KISHOR."
+                                }
                 },
 
                 {{"ALRIGHT"},

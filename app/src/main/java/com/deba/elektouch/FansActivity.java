@@ -15,7 +15,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
-
+import android.content.SharedPreferences;
 /**
  * Created by deba on 14/10/16.
  */
@@ -25,24 +25,35 @@ public class FansActivity extends AppCompatActivity {
     Switch fans;
     SeekBar regulator;
     String regulate;
-    com.deba.elektouch.FansActivity.Client client=new com.deba.elektouch.FansActivity.Client("192.168.100.142");
+    SharedPreferences fanState;
+    SharedPreferences.Editor editState;
+    com.deba.elektouch.FansActivity.Client client=new com.deba.elektouch.FansActivity.Client("192.168.13.35");
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fan);
         fans=(Switch)findViewById(R.id.switch_fans);
         regulator=(SeekBar)findViewById(R.id.regulator_fan);
+        fanState=getSharedPreferences("fans",0);
+        editState=fanState.edit();
+        if(fanState.getString("state",null)==null||fanState.getString("state",null).equals("off")){
+            editState.putString("state","off");
+        }
+        else if(fanState.getString("state",null).equals("on")){
+            fans.setChecked(true);
+        }
         client.execute();
-
         fans.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(buttonView.isChecked()){
                     Log.e("Lights","ON");
+                    editState.putString("state","on");
                     client.sendMessage("fans on");
                 }
                 else{
                     Log.e("Lights","OFF");
+                    editState.putString("state","off");
                     client.sendMessage("fans off");//
                 }
             }
@@ -53,7 +64,12 @@ public class FansActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 Log.e("Regulator",String.valueOf(progress));
                 if(fans.isChecked()) {
-                    regulate = "regulatefans" + String.valueOf(progress);
+                    if(Integer.parseInt(String.valueOf(progress))>=10&&Integer.parseInt(String.valueOf(progress))<=99)
+                        regulate = "regulatefans" + String.valueOf(progress);
+                    else if(Integer.parseInt(String.valueOf(progress))<=9)
+                        regulate = "regulatefans0" + String.valueOf(progress);
+                    else if(Integer.parseInt(String.valueOf(progress))==100)
+                        regulate = "regulatefans99";
                     client.sendMessage(regulate);
                 }
             }
@@ -73,6 +89,7 @@ public class FansActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         client.sendMessage("close");
+        editState.commit();
     }
     class Client extends AsyncTask implements Serializable {
 

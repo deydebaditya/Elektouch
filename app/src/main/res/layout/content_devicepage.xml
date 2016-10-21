@@ -58,12 +58,28 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" >
     </Button>
+    <Button
+        android:text="SIGN OUT"
+        android:textSize="25dp"
+        android:textAlignment="gravity"
+        android:gravity="end"
+        android:paddingTop="40dp"
+        android:paddingRight="70dp"
+        android:layout_width="fill_parent"
+        android:layout_height="140dp"
+        android:id="@+id/button_signout"
+        android:background="@drawable/button_devices"
+        android:elevation="13dp"
+        android:layout_below="@+id/button_ai"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" >
+    </Button>
 
     <ImageView
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:paddingTop="10dp"
-        android:src="@drawable/bulb"
+        android:src="@mipmap/bulb"
         android:layout_alignStart="@+id/button_lights"
         android:layout_alignLeft="@+id/button_lights"
         android:id="@+id/imageViewLights" />
@@ -72,7 +88,7 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:paddingTop="10dp"
-        android:src="@drawable/fan_icon"
+        android:src="@mipmap/fan_icon"
         android:id="@+id/imageViewFan"
         android:layout_below="@+id/button_lights"
         android:layout_alignParentLeft="true"
@@ -82,9 +98,19 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:paddingTop="10dp"
-        android:src="@drawable/ai"
+        android:src="@mipmap/ai"
         android:id="@+id/imageViewAI"
         android:layout_below="@+id/button_fan"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:paddingTop="10dp"
+        android:src="@mipmap/signout"
+        android:id="@+id/imageViewSignOut"
+        android:layout_below="@+id/button_ai"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 </RelativeLayout>

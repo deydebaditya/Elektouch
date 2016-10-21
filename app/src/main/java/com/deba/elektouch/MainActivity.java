@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             Intent device=new Intent(MainActivity.this,DeviceListActivity.class);
             startActivity(device);
+            finish();
         }
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -126,10 +127,13 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor newEdit=settings.edit();
                     newEdit.putString("uid",uid.getText().toString());
                     newEdit.putString("password",password.getText().toString());
+                    String name_store= (String) loginArray.getJSONObject(uid.getText().toString()).get("name");
+                    newEdit.putString("name",name_store.toUpperCase());
                     newEdit.commit();
                         Intent deviceListintent=new Intent(MainActivity.this,DeviceListActivity.class);
                         LOGGED_IN=1;
                         startActivity(deviceListintent);
+                        finish();
                     }
 //                }
             } catch (JSONException e1) {

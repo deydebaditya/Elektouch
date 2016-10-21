@@ -1,6 +1,7 @@
 package com.deba.elektouch;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -170,6 +171,10 @@ public class SignUpActivity extends AppCompatActivity {
             request.setEntity(new UrlEncodedFormEntity(params));
             HttpResponse response = httpClient.execute(request);
             Snackbar.make(v,"Signup Successful",Snackbar.LENGTH_SHORT).show();
+            Intent goToLogin=new Intent(SignUpActivity.this,MainActivity.class);
+            startActivity(goToLogin);
+            finish();
+            Toast.makeText(getApplicationContext(),"Hello! Please login to continue",Toast.LENGTH_SHORT).show();
             } catch (UnsupportedEncodingException e1) {
             e1.printStackTrace();
         } catch (ClientProtocolException e1) {

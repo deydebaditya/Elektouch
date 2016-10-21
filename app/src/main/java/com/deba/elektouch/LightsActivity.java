@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
+import android.content.SharedPreferences;
 
 /**
  * Created by deba on 8/10/16.
@@ -24,8 +25,10 @@ public class LightsActivity extends AppCompatActivity {
     Switch lights,strobe;
     SeekBar regulator;
     String regulate;
-//    Bundle getClient;
-    com.deba.elektouch.LightsActivity.Client client=new com.deba.elektouch.LightsActivity.Client("192.168.100.142");
+    SharedPreferences lightState;
+    SharedPreferences.Editor editState;
+    //    Bundle getClient;
+    com.deba.elektouch.LightsActivity.Client client=new com.deba.elektouch.LightsActivity.Client("192.168.13.35");
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,14 @@ public class LightsActivity extends AppCompatActivity {
         lights=(Switch)findViewById(R.id.switch_lights);
         strobe=(Switch)findViewById(R.id.switch_strobe);
         regulator=(SeekBar)findViewById(R.id.regulator);
+        lightState=getSharedPreferences("lights",0);
+        editState=lightState.edit();
+        if(lightState.getString("state",null)==null||lightState.getString("state",null).equals("off")){
+            editState.putString("state","off");
+        }
+        else if(lightState.getString("state",null).equals("on")){
+            lights.setChecked(true);
+        }
         client.execute();
         //TODO: check for on/off
         lights.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -42,10 +53,12 @@ public class LightsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(buttonView.isChecked()){
                     Log.e("Lights","ON");
+                    editState.putString("state","on");
                     client.sendMessage("lights on");
                 }
                 else{
                     Log.e("Lights","OFF");
+                    editState.putString("state","off");
                     client.sendMessage("lights off");
                 }
             }
@@ -71,7 +84,12 @@ public class LightsActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 Log.e("Regulator",String.valueOf(progress));
                 if(lights.isChecked()) {
-                    regulate = "regulatelights" + String.valueOf(progress);
+                    if(Integer.parseInt(String.valueOf(progress))>=10&&Integer.parseInt(String.valueOf(progress))<=99)
+                        regulate = "regulatelights" + String.valueOf(progress);
+                    else if(Integer.parseInt(String.valueOf(progress))<=9)
+                        regulate = "regulatelights0" + String.valueOf(progress);
+                    else if(Integer.parseInt(String.valueOf(progress))==100)
+                        regulate = "regulatelights99";
                     client.sendMessage(regulate);
                 }
             }
@@ -92,6 +110,7 @@ public class LightsActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         client.sendMessage("close");
+        editState.commit();
     }
 ///////////////////INNER CLASS IF OUTER DOESNT WORK/////////////////////////
     class Client extends AsyncTask implements Serializable{

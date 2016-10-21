@@ -12,7 +12,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
-
 /**
  * Created by root on 7/10/16.
  */
@@ -22,7 +21,7 @@ public class AI  extends AsyncTask<String,Void,String>{
     AI_actual ai = new AI_actual();
     String input;
     TextView reply_hint;
-    com.deba.elektouch.AI.Client client=new com.deba.elektouch.AI.Client("192.168.100.142");
+    com.deba.elektouch.AI.Client client=new com.deba.elektouch.AI.Client("192.168.13.35");
 
     public AI(Activity myactivity,TextView reply) {
         super();
